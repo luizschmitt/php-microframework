@@ -1,0 +1,17 @@
+{
+    "name": "luizschmitt/php-microframework",
+    "description": "PHP Microframework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Luiz Schmitt",
+        "email": "lzschmitt@gmail.com"
+    }],
+    "require": {},
+    "autoload": {
+        "files": ["scripts/helper.php"],
+        "psr-4": {
+            "PHPExpress\\": "src"
+        }
+    }
+}
