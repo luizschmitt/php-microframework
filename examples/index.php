@@ -2,13 +2,36 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-new \PHPExpress\Http\Cors([
-    'origin'      => '*',
-    'credentials' => true,
-    'max-age'     => 86400,
-    'headers'     => ['Content-Type', 'Accept', 'Origin', 'Authorization'],
-    'methods'     => ['GET', 'PUT', 'DELETE', 'POST', 'PATCH', 'OPTIONS']
-]);
+
+$app = new \PHPExpress\App();
+
+
+$app->get('/teste', function () {
+    echo "pagina de teste";
+});
+
+$app->group([
+    'middleware' => ['auth', 'jwt'],
+    'prefix' => '/admin',
+], function () {
+    $this->get('/dashboard', function () {
+        echo "você esta em dashboard";
+    });
+
+    $this->get('/login', function () {
+        echo "você esta em login do admin";
+    });
+});
+
+$app->get('/', function ($request, $response) {
+    return $response->json([
+        'message' => 1
+    ]);
+});
+
+$app->run();
+/*
+
 
 $request = new \PHPExpress\Http\Request();
 $response = new \PHPExpress\Http\Response();
